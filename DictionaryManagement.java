@@ -14,7 +14,7 @@ public class DictionaryManagement {
         System.out.print("Nhap nghia : ");
         String explain = scan.nextLine();           //nhap nghĩa tieng Viet
         nhapTu.setWord_explain(explain);
-        scan.close();
+        //scan.close();
 
     }
 }
