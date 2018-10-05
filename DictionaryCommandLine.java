@@ -23,4 +23,14 @@ public class DictionaryCommandLine{
         input.insertFromCommandline(word);// them tu
         showAllWord(word);   //in ra cac tu da nhap
     }
+    
+    public void dictionaryAdvanced() {
+        Dictionary word = new Dictionary();
+        DictionaryManagement input = new DictionaryManagement();     
+        input.insertFromFile(word);
+        showAllWord(word);   //in ra cac tu da nhap
+        
+        input.dictionaryLookup(word);
+        
+    }
 }
