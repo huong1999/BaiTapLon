@@ -1,74 +1,77 @@
 package com.company;
 
-import java.util.Scanner;
 import java.io.File;
+import java.util.Scanner;
+//import java.io.FileReader;
 
-public class DictionaryManagement {
-
+public class DictionaryManagement{
+    
     public void insertFromCommandline(Dictionary ad) {
         Scanner scan = new Scanner(System.in);
         System.out.print("So luong tu can nhap : ");
         int size = scan.nextInt();
-        String target, explain;
         scan.nextLine();
-        for (int i = 0; i < size; i++) {
-            Word nhapTu = new Word();
+        for(int i = 0; i < size; i++) {
             System.out.print("Nhap tu moi : ");
-
-            target = scan.nextLine();            //nhap tu tieng Anh
-            nhapTu.setWord_target(target);
-
+            String target = scan.nextLine();            //nhap tu tieng Anh
             System.out.print("Nhap nghia : ");
-
-            explain = scan.nextLine();           //nhap nghĩa tieng Viet
-            nhapTu.setWord_explain(explain);
+            String explain = scan.nextLine();           //nhap nghĩa tieng Viet
+            Word nhapTu = new Word(target, explain);
             ad.list.add(nhapTu);
         }
 
     }
+    
+         public void insertFromFile(Dictionary ad) {
 
-    public void insertFromFile(Dictionary ad) {
-
-        try (Scanner sc = new Scanner(new File("dictionaries.txt"))) {
+        
+        
+       try (Scanner sc = new Scanner(new File("Dictionary.txt"))) {
             String str;
-
+ 
             while (sc.hasNext()) {
-
+              
                 str = sc.nextLine();
-                Word nhapTu = new Word();
                 int idx = 0;
                 for (int i = 0; i < str.length(); i++) {
-
+                
                     if (str.charAt(i) == '\t') {
                         idx = i;
+                        
                         break;
                     }
-                }
-                
-                String vn = str.substring(0, idx);
-                String en = str.substring(idx + 1);
-                nhapTu.setWord_target(vn);
-                nhapTu.setWord_explain(en);
+
+                }            
+                String vn   = str.substring(0,idx);
+                String en   = str.substring(idx+1);
+                Word nhapTu = new Word(vn, en);
                 ad.list.add(nhapTu);
             }
-            
-        } catch (Exception e) {
-        }
-    }
+        } 
+       catch (Exception e){
+             System.err.println("getMessage():" + e.getMessage());
+         }
+}
+         public void dictionaryLookup(Dictionary ad)
+         {
+             System.out.print("Nhap tu can tim : ");
+             Scanner scan = new Scanner(System.in);
+             String target = scan.nextLine();
+             int mark = 1;
+             for (Word words : ad.list)
+             {
+                 if (words.getWord_target().contains(target))
+                 {
+                    System.out.println(mark + ")    " + words.getWord_target() + '\t' + words.getWord_explain());
+                    mark ++;
+                 }
+                 else {
+                     continue;
+                 }
+             }
+             if (mark == 1) {
+                 System.out.println("Khong tim thay tu can nhap");
+             }
+         }
 
-    public void dictionaryLookup(Dictionary ad) {
-        Scanner scan = new Scanner(System.in);
-        System.out.print("Nhap tu can tim ");
-        String find = scan.nextLine();
-        int num = 1;
-
-        for (Word element : ad.list) {
-            if (element.getWord_target().contains(find)) {
-                System.out.printf("|%-7d|%-50s|%-50s|\n",num, element.getWord_target(), element.getWord_explain());
-            } else {
-                num++;
-            }
-        }
-
-    }
 }
