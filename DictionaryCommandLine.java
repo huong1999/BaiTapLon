@@ -5,15 +5,15 @@ public class DictionaryCommandLine{
     public void showAllWord(Dictionary ad) {
         
         System.out.println(" No         |English    |Vietnamese");
-        int j = 1;
+        int STT = 1;
         for (int i = 0; i < ad.list.size(); i++) {
 
-            System.out.print(" " + j);
+            System.out.print(" " + STT);
             System.out.print("          |");
             System.out.print(ad.list.get(i).getWord_target());
             System.out.print("         |");
             System.out.println(ad.list.get(i).getWord_explain());
-            j++;
+            STT++;
         }
     }
 
