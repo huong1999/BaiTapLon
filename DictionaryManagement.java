@@ -132,5 +132,30 @@ public class DictionaryManagement{
         }
 
     }
+    public int binaryseach(Dictionary ad, String key) {
+        int r = ad.list.size();
+        int l = 0;
+        int o;
+        o = -1;
+        while (l <= r) {
+            int m = (int) (r + l) / 2;
+            if (ad.list.get(m).getWord_target().startsWith(key)) {
+                o = m;
+                break;
+            } else if (ad.list.get(m).getWord_target().compareTo(key) > 0) {
+                r = m ;
+            } else {
+                l = m ;
+            }
+        }
+        if (o != -1) {
+            while (ad.list.get(o).getWord_target().startsWith(key)) {
+                o--;
+            }
+            o++;
+        }
+        return o;
+
+    }
         
 }
