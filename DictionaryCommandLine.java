@@ -56,21 +56,23 @@ public class DictionaryCommandLine{
             System.out.println("Khong tim thay tu can nhap");
         }
     }
-    public void searchTu (Dictionary ad){
+    public void searchTu(Dictionary ad) {
         DictionaryManagement input = new DictionaryManagement();
         System.out.println("Nhap tu can tra: ");
-        Scanner sc = new Scanner (System.in);
+        Scanner sc = new Scanner(System.in);
         String key = sc.nextLine();
-        int id =input.binaryseach(ad, key) ;
-        if (id!= -1 && id <= ad.list.size()) {
-            while (ad.list.get(id).getWord_target().startsWith(key)){
-                
-            
+        int id = input.binaryseach(ad, key);
+        if (id != -1) {
+            while (ad.list.get(id).getWord_target().startsWith(key)) {
                 System.out.println(ad.list.get(id).getWord_target() + '\t' + ad.list.get(id).getWord_explain());
-                id ++;
+                if (id < ad.list.size() - 1) {
+                    id++;
+                } else {
+                    break;
+                }
             }
+        } else {
+            System.out.println("Khong tim thay tu!");
         }
-        else 
-        System.out.println("Khong tim thay tu!");
     }
 }
