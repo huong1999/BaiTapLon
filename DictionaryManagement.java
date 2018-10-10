@@ -86,17 +86,40 @@ public class DictionaryManagement{
     }
     
     // Chuc nang sua du lieu trong tu dien
-    public void editWord(Dictionary ad) {
+     public void editWord(Dictionary ad) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Nhap tu can sua trong tu dien : ");
         String target = scan.nextLine();
-        System.out.println("Nhap tu vung moi : ");
-        String newTarget = scan.nextLine();
-        System.out.println("Nhap nghia : ");
-        String explain = scan.nextLine();
-        
+        int mark = 0;
+        for (Word words : ad.list)
+             {
+                 if (words.getWord_target().equals(target))
+                 {
+                     ad.list.remove(words);
+                     mark ++;
+                     break;
+                 }
+              }
+        if (mark == 0) {
+            System.out.println("Khong tim thay tu");
+        }
+        else {
+            System.out.println("Nhap tu da sua : ");
+            String newTarget = scan.nextLine();
+            System.out.println("Nhap nghia : ");
+            String explain = scan.nextLine();
+            Word words = new Word(newTarget, explain);
+            ad.list.add(words);
+            Collections.sort(ad.list, new Comparator<Word>()
+                {
+                    @Override
+                    public int compare(Word w1, Word w2)
+                    {
+                        return (w1.getWord_target().compareTo(w2.getWord_target()));
+                    }
+                }); 
+        }
     }
-    
     //Chuc nang them du lieu tu dien
     public void addWord(Dictionary ad) {
         Scanner scan = new Scanner(System.in);
