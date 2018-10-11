@@ -154,7 +154,7 @@ public class DictionaryManagement{
         }
 
     }
-   public int binaryseach(Dictionary ad, String key) {
+    public int binaryseach(Dictionary ad, String key) {
         int r = ad.list.size() - 1;
         int l = 0;
         int o = -1;
@@ -179,8 +179,9 @@ public class DictionaryManagement{
             while (o >= 1 && ad.list.get(o - 1).getWord_target().startsWith(key)) {
                 o--;
             }
-            return o;
         }
+        return o;
+
     }
         
 }
