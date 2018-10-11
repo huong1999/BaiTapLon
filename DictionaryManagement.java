@@ -154,19 +154,21 @@ public class DictionaryManagement{
         }
 
     }
-    public int binarySearch(Dictionary ad, String key) {
+   public int binarySearch(Dictionary ad, String key) {
         int r = ad.list.size() - 1;
         int l = 0;
         int o = -1;
         int m = 0;
         if (ad.list.get(r).getWord_target().startsWith(key)) {
             o = r;
+        } else if (ad.list.get(l).getWord_target().startsWith(key)) {
+            o = l;
         } else {
+
             while (l < r) {
                 m = (int) (r + l) / 2;
                 if (ad.list.get(m).getWord_target().startsWith(key)) {
                     o = m;
-                    System.out.println("int " + o);
                     break;
                 } else if (m == l && l + 1 == r) {
                     return -1;
