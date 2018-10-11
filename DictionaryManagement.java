@@ -115,6 +115,7 @@ public class DictionaryManagement{
                         return (w1.getWord_target().compareTo(w2.getWord_target()));
                     }
                 }); 
+          System.out.println("Da sua!");  
         }
     }
     //Chuc nang them du lieu tu dien
@@ -134,6 +135,7 @@ public class DictionaryManagement{
                         return (w1.getWord_target().compareTo(w2.getWord_target()));
                     }
                 });
+        System.out.println("Da them!");
     }
     
     public void dictionaryExportToFile(Dictionary ad) {
