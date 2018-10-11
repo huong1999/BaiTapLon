@@ -15,17 +15,17 @@ public class Tests {
        System.out.println("3) Thêm, sửa, xóa dữ liệu trong từ điển ");
        System.out.println("4) Xuất dữ liệu trong từ điển ra file ");
        System.out.println("5) Thoát ");
-       Scanner sc = new Scanner(System.in);
-       int id;
-       do { 
-           System.out.print("Nhập lựa chọn : ");
+        Scanner sc = new Scanner(System.in);
+        int id;
+      do { 
+          System.out.print("Nhập lựa chọn chức năng từ điển : ");
            id = sc.nextInt();
            while (!(id >= 1 && id <=5 ))
-               {
-                   System.out.println("Nhap sai, xin nhap lai : ");
-                   id = sc.nextInt();    
-               }
-           switch (id) {
+       {
+           System.out.print("Nhap sai, xin nhap lai : ");
+           id = sc.nextInt();    
+       }
+          switch (id) {
            case 1 : 
            {
                listWord.dictionarySearcher(ad);
@@ -42,11 +42,11 @@ public class Tests {
                System.out.println("2) Sửa dữ liệu ");
                System.out.println("3) Xóa dữ liệu ");
                 System.out.println("4) Thoát ");
-               System.out.println("Nhập lựa chọn : ");
+               System.out.print("Nhập lựa chọn : ");
                int a = sc.nextInt();
                while (!(a >= 1 && a <=4 ))
                     {
-                        System.out.println("Nhap sai, xin nhap lai : ");
+                        System.out.print("Nhap sai, xin nhap lai : ");
                         a = sc.nextInt();    
                     }
                switch(a) {
