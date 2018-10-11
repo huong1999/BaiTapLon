@@ -154,7 +154,7 @@ public class DictionaryManagement{
         }
 
     }
-    public int binaryseach(Dictionary ad, String key) {
+    public int binarySearch(Dictionary ad, String key) {
         int r = ad.list.size() - 1;
         int l = 0;
         int o = -1;
