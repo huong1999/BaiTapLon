@@ -36,32 +36,13 @@ public class DictionaryCommandLine{
     }
     
     //Phien ban cai tien lan 2
+    
     public void dictionarySearcher(Dictionary ad) {
-        System.out.print("Nhap tu can tim : ");
-        Scanner scan = new Scanner(System.in);
-        String target = scan.nextLine();
-        int mark = 1;
-        for (Word words : ad.list)
-        {
-            if (words.getWord_target().contains(target))
-            {
-               System.out.println(mark +")     " + words.getWord_target() + '\t' + words.getWord_explain());
-               mark ++;
-            }
-            else {
-                continue;
-            }
-        }
-        if (mark == 1) {
-            System.out.println("Khong tim thay tu can nhap");
-        }
-    }
-    public void searchTu(Dictionary ad) {
         DictionaryManagement input = new DictionaryManagement();
-        System.out.println("Nhap tu can tra: ");
+        System.out.print("Nhap tu can tra : ");
         Scanner sc = new Scanner(System.in);
         String key = sc.nextLine();
-        int id = input.binaryseach(ad, key);
+        int id = input.binarySearch(ad, key);
         if (id != -1) {
             while (ad.list.get(id).getWord_target().startsWith(key)) {
                 System.out.println(ad.list.get(id).getWord_target() + '\t' + ad.list.get(id).getWord_explain());
