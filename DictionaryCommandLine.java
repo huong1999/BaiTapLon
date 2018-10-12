@@ -6,16 +6,9 @@ public class DictionaryCommandLine{
     
     //Phien ban so khai
     public void showAllWord(Dictionary ad) {   
-        System.out.println(" No         |English    |Vietnamese");
-        int j = 1;
+        System.out.printf("%-6s|%-40s|%s\n", "No", "English", "Vietnamese");
         for (int i = 0; i < ad.list.size(); i++) {
-
-            System.out.print(" " + j);
-            System.out.print("          |");
-            System.out.print(ad.list.get(i).getWord_target());
-            System.out.print("         |");
-            System.out.println(ad.list.get(i).getWord_explain());
-            j++;
+            System.out.printf("%-6d|%-40s|%s\n", i+1 , ad.list.get(i).getWord_target(), ad.list.get(i).getWord_explain());
         }
     }
     
