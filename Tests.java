@@ -29,7 +29,7 @@ public class Tests {
         Scanner sc = new Scanner(System.in);
         int id;
         do {
-            System.out.print("Nhap lua chon chuc nang trong tu dien : ");
+            System.out.print("Nhap lua chon chuc nang : ");
             id = sc.nextInt();
             while (!(id >= 1 && id <= 6)) {
                 System.out.print("Nhap sai, xin nhap lai : ");
