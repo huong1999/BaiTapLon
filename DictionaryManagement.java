@@ -1,5 +1,14 @@
-package com.company;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package dictionary;
 
+/**
+ *
+ * @author Admin
+ */
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Scanner;
@@ -8,116 +17,111 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class DictionaryManagement{
+public class DictionaryManagement {
+
     // Phien ban so khai
     public void insertFromCommandline(Dictionary ad) {
         Scanner scan = new Scanner(System.in);
         System.out.print("So luong tu can nhap : ");
         int size = scan.nextInt();
         scan.nextLine();
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             System.out.print("Nhap tu moi : ");
-            String target = scan.nextLine();           
+            String target = scan.nextLine();
             System.out.print("Nhap nghia : ");
-            String explain = scan.nextLine();          
+            String explain = scan.nextLine();
             Word nhapTu = new Word(target, explain);
             ad.list.add(nhapTu);
         }
 
     }
-    
+
     //Phien ban cai tien lan 1
-    public void insertFromFile(Dictionary ad) {      
+    public void insertFromFile(Dictionary ad) {
         try (Scanner scan = new Scanner(new File("dict.txt"))) {
-            while(scan.hasNext()){
+            while (scan.hasNext()) {
                 String target = scan.next();
                 String explain = scan.nextLine();
                 Word words = new Word(target, explain);
                 ad.list.add(words);
             }
+        } catch (Exception e) {
+            System.err.println("getMessage():" + e.getMessage());
         }
-       catch (Exception e){
-             System.err.println("getMessage():" + e.getMessage());
-         }
     }
-    
+
     public void dictionaryLookup(Dictionary ad) {
         System.out.print("Nhap tu can tim : ");
         Scanner scan = new Scanner(System.in);
         String target = scan.nextLine();
         int mark = 1;
-        for (Word words : ad.list)
-         {
+        int ind = binarySearch(ad,target);
+        for (Word words : ad.list) {
             if (words.getWord_target().equals(target)) {
-                System.out.println(words.getWord_target() + '\t' + words.getWord_explain());
-                mark ++;
-            }
-            else {
+                System.out.printf("%-4s     |%-30s|%s\n", "No", "English", "Vietnamese");
+                System.out.printf("%-4d     |%-30s|%s\n", ind , ad.list.get(ind).getWord_target(), ad.list.get(ind).getWord_explain());
+                mark++;
+            } else {
                 continue;
             }
-          }
+        }
         if (mark == 1) {
-             System.out.println("Khong tim thay tu!");
+            System.out.println("Khong tim thay tu!");
         }
     }
+
     //Phien ban cai tien lan 2
     // Chuc nang xoa du lieu tu dien
-    public void removeWord(Dictionary ad) { 
+    public void removeWord(Dictionary ad) {
         Scanner scan = new Scanner(System.in);
         System.out.print("Nhap tu can xoa khoi tu dien : ");
         String target = scan.nextLine();
         int mark = 0;
-        for (Word words : ad.list)
-             {
-                 if (words.getWord_target().equals(target))
-                 {
-                     ad.list.remove(words);
-                     System.out.println("Da xoa!");
-                     mark ++;
-                     break;
-                 }
-              }
+        for (Word words : ad.list) {
+            if (words.getWord_target().equals(target)) {
+                ad.list.remove(words);
+                System.out.println("Da xoa!");
+                mark++;
+                break;
+            }
+        }
         if (mark == 0) {
             System.out.println("Tu khong co trong tu dien!");
         }
     }
-    
+
     // Chuc nang sua du lieu trong tu dien
-     public void editWord(Dictionary ad) {
+    public void editWord(Dictionary ad) {
         Scanner scan = new Scanner(System.in);
         System.out.print("Nhap tu can sua trong tu dien : ");
         String target = scan.nextLine();
         int mark = 0;
-        for (Word words : ad.list)
-             {
-                 if (words.getWord_target().equals(target))
-                 {
-                     ad.list.remove(words);
-                     mark ++;
-                     break;
-                 }
-              }
+        for (Word words : ad.list) {
+            if (words.getWord_target().equals(target)) {
+                ad.list.remove(words);
+                mark++;
+                break;
+            }
+        }
         if (mark == 0) {
             System.out.println("Khong tim thay tu");
-        }
-        else {
+        } else {
             System.out.print("Nhap tu da sua : ");
             String newTarget = scan.nextLine();
             System.out.print("Nhap nghia : ");
             String explain = scan.nextLine();
             Word words = new Word(newTarget, explain);
             ad.list.add(words);
-            Collections.sort(ad.list, new Comparator<Word>()
-                {
-                    @Override
-                    public int compare(Word w1, Word w2)
-                    {
-                        return (w1.getWord_target().compareTo(w2.getWord_target()));
-                    }
-                }); 
-          System.out.println("Da sua!");  
+            Collections.sort(ad.list, new Comparator<Word>() {
+                @Override
+                public int compare(Word w1, Word w2) {
+                    return (w1.getWord_target().compareTo(w2.getWord_target()));
+                }
+            });
+            System.out.println("Da sua!");
         }
     }
+
     //Chuc nang them du lieu tu dien
     public void addWord(Dictionary ad) {
         Scanner scan = new Scanner(System.in);
@@ -126,18 +130,16 @@ public class DictionaryManagement{
         System.out.print("Nhap nghia : ");
         String explain = scan.nextLine();
         Word words = new Word(target, explain);
-        ad.list.add(words);
-        Collections.sort(ad.list, new Comparator<Word>()
-                {
-                    @Override
-                    public int compare(Word w1, Word w2)
-                    {
-                        return (w1.getWord_target().compareTo(w2.getWord_target()));
-                    }
-                });
+        ad.list.add(words);         //them tu vua nhap vao ArrayList
+        Collections.sort(ad.list, new Comparator<Word>() {
+            @Override
+            public int compare(Word w1, Word w2) {
+                return (w1.getWord_target().compareTo(w2.getWord_target()));
+            }
+        });
         System.out.println("Da them!");
     }
-    
+
     public void dictionaryExportToFile(Dictionary ad) {
         System.out.print("Nhap ten file de xuat du lieu (duoi dang tenFile.txt) : ");
         Scanner scan = new Scanner(System.in);
@@ -148,13 +150,14 @@ public class DictionaryManagement{
                 writer.write(word.getWord_target() + "\t" + word.getWord_explain() + "\r\n");
             }
             writer.close();
-            
+
         } catch (Exception e) {
             System.out.println(e);
         }
 
     }
-   public int binarySearch(Dictionary ad, String key) {
+
+    public int binarySearch(Dictionary ad, String key) {
         int r = ad.list.size() - 1;
         int l = 0;
         int o = -1;
@@ -185,5 +188,5 @@ public class DictionaryManagement{
         return o;
 
     }
-        
+
 }
