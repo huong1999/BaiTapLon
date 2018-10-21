@@ -40,7 +40,7 @@ public class DictionaryCommandLine {
             while (ad.list.get(id).getWord_target().startsWith(key)) {
                 System.out.printf("%-14d     |%-30s|%s\n", id , ad.list.get(id).getWord_target(), ad.list.get(id).getWord_explain());
                 if (id < ad.list.size() - 1) {
-                    id++;
+                       id++;
                 } else {
                     break;
                 }
