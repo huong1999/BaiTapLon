@@ -10,7 +10,7 @@ import java.util.List;
 
 public class DictionaryManagement{  
    static Dictionary ad = new Dictionary();
-   
+   //đọc data từ file dict.txt
     public void insertFromFile() {      
         try (Scanner scan = new Scanner(new File("dict.txt"))) {
             while(scan.hasNext()){
@@ -24,7 +24,7 @@ public class DictionaryManagement{
              System.err.println("getMessage():" + e.getMessage());
          }
     }
-    
+    //tìm kiếm tuyệt đối
     public String dictionaryLookup(String target) {
         int mark = 1;
         String mean = new String();
@@ -70,7 +70,7 @@ public class DictionaryManagement{
                     }
                 });
     }
-      
+   //tìm kiếm nhị phân
     public int binarySearch(Dictionary ad, String key) {
         int r = ad.list.size() - 1;
         int l = 0;
@@ -102,13 +102,13 @@ public class DictionaryManagement{
         return o;
 
     }
+   //tìm  kiếm tương đối
     public ArrayList<String> dictionarySearcher(String key) {
        ArrayList<String> targets = new ArrayList<>();
         int id = binarySearch(ad, key);
         if (id != -1) {
             while (ad.list.get(id).getWord_target().startsWith(key)) {
                 targets.add(ad.list.get(id).getWord_target());
-                //System.out.println(ad.list.get(id).getWord_target() + '\t' + ad.list.get(id).getWord_explain());
                 if (id < ad.list.size() - 1) {
                     id++;
                 } else {
