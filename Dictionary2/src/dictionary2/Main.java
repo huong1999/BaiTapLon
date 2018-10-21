@@ -15,7 +15,7 @@ public class Main extends Application {
             Parent root = FXMLLoader.load(this.getClass().getResource("sample.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
-            primaryStage.setTitle("Dictionary");
+            primaryStage.setTitle("Dictionary E-V");
             primaryStage.show();
         }catch (Exception e){
             System.out.println(e.getMessage());
